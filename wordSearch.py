@@ -10,7 +10,8 @@ while repeat == "Y":
         print("please use a space")
     else:
         string = name.split(" ")
-        firstname,surname = string[0], string[1]
+        size = len(string)
+        firstname,surname = string[0], string[size-1]
         print(firstname[0],surname)
         print("Firstname is ",firstname)
         amount = len(firstname)
@@ -21,12 +22,16 @@ while repeat == "Y":
                     vowel+=1
         print("Amount of vowels is ", vowel)
         print("Reversed is ", firstnameRev)
-        search = input("Search for a specific vowel: ")
-        again = "yes"
-        while again == "yes":
-            for i in range(amount-1,-1,-1):
-                if search in firstname[i]:
-                    searchRes += 1
-        print("amount: ",searchRes)
-        again = input("Another search? ")
+        again = "Y"
+        while again == "Y":
+            search = input("Search for a specific letter(notice the program is case sensitive: ")
+            if len(search) > 1:
+                print("please use only one character")
+            else:
+                searchRes = 0
+                for i in range(amount-1,-1,-1):
+                    if search in firstname[i]:
+                        searchRes += 1
+                print("amount: ",searchRes)
+            again = input("Another search? Use Y/N ")
     repeat = input("Again? Use Y/N")
