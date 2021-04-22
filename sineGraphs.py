@@ -2,7 +2,7 @@ import math
 angles=[]
 quantity = 0
 count = 0
-
+enter = [1]
 def angleSine():
     error = "no"
     while error == "no":
@@ -35,7 +35,7 @@ def angleSine():
             error = "Y"
         else:
             print("INVALID! Please use A or S")
-            error = "no"
+            enter[0] = 0
     return angle
               
 def Find(quantity, angle):
