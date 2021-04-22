@@ -82,5 +82,3 @@ while error == "Y":
     Find(quantity,angleSine())
     error = input("Would you like to go again?")
     
-    
-#find the smalles multiple of 180 inside the range!!!!!!!! Then, calculate all values of angle until x > maximum... and done
