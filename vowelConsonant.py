@@ -4,17 +4,26 @@ consonantNum = 0
 vowelInclude = ""
 consonantInclude = ""
 sentence = input("Please enter your word/sentence here: ")
-for i in sentence:
+for i in range(0,len(sentence)):
+    print(i)
     for x in range(0,len(vowels)):
-        if vowels[x] in sentence[x]:
-            vowelInclude += sentence[x]
+        print(x)
+        include = ""
+        if vowels[x] in sentence[i]:
+            vowelInclude += sentence[i]
             vowelNum += 1
-        elif vowels[x].upper() in sentence[x]:
-            vowelInclude += sentence[x]
+            print("yes",sentence[i],vowels[x])
+            include = "no"
+        elif vowels[x].upper() in sentence[i]:
+            vowelInclude += sentence[i]
             vowelNum += 1
-        else:
-            consonantInclude += sentence[x]
+            print("yes upper",sentence[i],vowels[x])
+            include= "no"
+        if include == "":
+            consonantInclude += sentence[i]
             consonantNum += 1
+            print("no",sentence[i],vowels[x])
+
 
 print(vowelNum)
 print(consonantNum)
