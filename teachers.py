@@ -1,6 +1,6 @@
 classHold = []
 average = []
-size = int(input("How many students do you have?"))
+size = int(input("How many students do you have? "))
 count = 1
 while len(classHold) != size:
     print("Enter Student ",count,"'s name here: ")
@@ -8,8 +8,6 @@ while len(classHold) != size:
     classHold.append([student])
     classHold[count-1].append([])
     count+= 1
-
-print(classHold)
 
 def Test(number):
     average.append([])
@@ -31,7 +29,7 @@ for i in range(0,loop):
     print("Average of Test", i+1, "was of ",average[i][1])
 
 print("Average of all Tests was of ",allTests/(size*loop))
-
+        
 for i in range(0,size):
     amount = 0
     classHold[i][1].append(0)
@@ -52,3 +50,6 @@ for i in range(0,size):
         for ii in range(0,loop):
             if classHold[i][1][ii] < 5:
                 print("However, Test ",ii+1,"needs to be retaken by ",classHold[i][0])
+
+from tabulate import tabulate
+print(tabulate(classHold[0], classHold[1], headers=['Name', 'Age']))
