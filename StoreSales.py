@@ -18,9 +18,15 @@ minimum = sales[0][1]
 maximum = sales[0][1]
 indexes = [[0,0],[0,0]]
 
+for i in range(0,stores):
+    print("")
+    for j in range(1,5):
+        print("Shop",i+1,outletName[i],"Term ",j,"=",sales[i][j])
+    print("")
+    print("Total for",outletName[i],": ",sales[i][0])
+
 print(" ")
 for i in range(0,stores):
-    print("Total for",outletName[i],": ",sales[i][0])
     for j in range(1,5):
         if sales[i][j]< minimum:
             minimum = sales[i][j]
@@ -31,7 +37,6 @@ for i in range(0,stores):
             indexes[1][0] = i
             indexes[1][1] = j-1
 
-print(" ")
 for i in range(0,4):
     print("Total for quarter",i+1,":",quarter[i])
 
