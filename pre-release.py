@@ -1,25 +1,18 @@
-courts = [[0,0,0,0,0,0,0,0,0,0,"free"],[0,0,0,0,0,0,0,0,0,0,"free"],[0,0,0,0,0,0,0,0,0,0,"free"],[0,0,0,0,0,0,0,0,0,0,"free"],[0,0,0,0,0,0,0,0,0,0,"free"],[0,0,0,0,0,0,0,0,0,0,"free"],[0,0,0,0,0,0,0,0,0,0,"free"],[0,0,0,0,0,0,0,0,0,0,"free"]]
+import random
+courts = [[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]
 
-guests = [[0,0,"name","phone"]]
+#[code,"name","phone"]
+guests = []
 
 hours = [8,9,10,11,12,13,14,15,16,17,18]
 
-def Free(number):
+"""def Free(number):
     free = 0
     for i in range (0,8):
         if not(courts[number][i]):
             free += 1
     courts[number][8] = free
-    return free
-
-for i in range(0,8):
-    print("Court ",i+1,"'s availability: ")
-    print(" ")
-    for j in range(0,10):
-        print("Hour: ",hours[j],":00 to",(hours[j]+1),":00")
-        if not(courts[i][j]):
-            print("Free")
-    print(" ")
+    return free"""
 
 def CheckTime(selected):
     store = 0
@@ -28,9 +21,33 @@ def CheckTime(selected):
             store = i
             print(store)
     for i in range(0,8):
-        print("Court: ",i+1,"\n Hour: ",selected)
+        print("Court: ",i+1)
         if not(courts[i][store]):
             print("Free")
 
-selected = input("What time would you like?")
-CheckTime(selected)
+def Availability(i,j):
+    if not(courts[i][j]):
+        print("Free")
+    else:
+        print("booked")
+
+for i in range(0,8):
+    print("Court ",i+1,"'s availability: ")
+    print(" ")
+    for j in range(0,10):
+        print("Hour: ",hours[j],":00 to",(hours[j]+1),":00")
+        Availability(i,j)
+    print(" ")
+
+def Schedule(court,time):
+    guests.append([])
+    guests[-1].append(random.randint(1000,9999))
+    name = input("What is the guest's name?")
+    guests[-1].append(name)
+    phone = input("What is the guest's phone number?")
+    guests[-1].append(phone)
+    courts[court][time] = len(guests)
+
+Schedule(7,3)
+print(courts[7])
+print(guests)
