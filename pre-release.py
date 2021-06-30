@@ -8,6 +8,9 @@ guests = []
 
 hours = [8,9,10,11,12,13,14,15,16,17,18]
 
+day = "started"
+print("Day Has Started", end = " ")
+
 #finds the time position correspondant to user's entry
 def timeArray(selected):
     for i in range(0,10):
@@ -32,6 +35,7 @@ def CheckTime(selected):
         print("Court: ",i+1)
         Availability(i,store)
 
+#makes sure that all codes are unique
 def CheckUnique():
     rep = len(guests)
     print(rep)
@@ -40,7 +44,8 @@ def CheckUnique():
         for i in range(0,rep-1):    
             while guests[-1][0] == guests[i][0]:
                 guests[-1][0] = random.randint(1000,9999)
-    
+
+#sets up a new guest with info
 def Schedule(court,time):
     guests.append([])                          
     guests[-1].append(1890)
@@ -51,6 +56,7 @@ def Schedule(court,time):
     guests[-1].append(phone)
     courts[court][time] = len(guests)
 
+#schedules the guest and makes sure it is valid
 def CourtSchedule():
     courtOption = int(input("What court are you booking?"))
     timeOption = int(input("At what time would you like to book?"))
@@ -63,24 +69,37 @@ def CourtSchedule():
         print("Court already booked at given time \n Try Again.")
         return 1
 
+def Action1():
+    x = 1
+    while x:
+        x = CourtSchedule()
+    
+def Action2():
+    check = int(input("Enter the starting hour of the time you want to check: "))
+    CheckTime(check)
+
 #print availability for courts at all times 
-for i in range(0,8):
-    print("Court ",i+1,"'s availability: ")
-    print(" ")
-    for j in range(0,10):
-        print("Hour: ",hours[j],":00 to",(hours[j]+1),":00")
-        Availability(i,j)
-    print(" ")
+def Action3():
+    for i in range(0,8):
+        print("Court ",i+1,"'s availability: ")
+        print(" ")
+        for j in range(0,10):
+            print("Hour: ",hours[j],":00 to",(hours[j]+1),":00")
+            Availability(i,j)
+        print(" ")
 
-x = 1
-while x:
-    x = CourtSchedule()
+Action3()
+while day != "Y":
+    print("To Schedule a Guest enter \'1\' \n To check the availability for a specific time enter \'2\' \n To look the availability for all courts at all times enter \'3\' \n For none of these option enter \'4\' ")
+    choice = int(input("Enter your choice here: "))
+    if choice == 1:
+        Action1()
+    elif choice == 2:
+        Action2()
+    elif choice == 3:
+        Action3()
+        
+    day = input("Is the day over yet?")
+    
 
-CheckTime(8)
-
-x = 1
-while x:
-    x = CourtSchedule()
-
-CheckTime(10)
 
