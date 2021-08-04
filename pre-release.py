@@ -9,7 +9,8 @@ guests = []
 hours = [8,9,10,11,12,13,14,15,16,17,18]
 
 day = "started"
-print("Day Has Started", end = " ")
+print("Day Has Started")
+print(" ")
 
 #finds the time position correspondant to user's entry
 def timeArray(selected):
@@ -26,6 +27,8 @@ def Availability(i,j):
         position = courts[i][j]-1
         for i in range(0,3):
             print(corresponding[i],": ",guests[position][i])
+        
+        
 
 #checks what courts are free at a specific time
 def CheckTime(selected):
@@ -38,8 +41,6 @@ def CheckTime(selected):
 #makes sure that all codes are unique
 def CheckUnique():
     rep = len(guests)
-    print(rep)
-
     if rep > 1:
         for i in range(0,rep-1):    
             while guests[-1][0] == guests[i][0]:
@@ -52,22 +53,50 @@ def Schedule(court,time):
     CheckUnique()
     name = input("What is the guest's name?")
     guests[-1].append(name)
-    phone = input("What is the guest's phone number?")
+    correct = "NO"
+    while correct != "Y":
+        phone = input("Enter the guest's phone number: ")
+        print(phone)
+        correct = input("Does the user confirm the number?")
     guests[-1].append(phone)
     courts[court][time] = len(guests)
 
 #schedules the guest and makes sure it is valid
 def CourtSchedule():
-    courtOption = int(input("What court are you booking?"))
     timeOption = int(input("At what time would you like to book?"))
     time = timeArray(timeOption)
+    count = 0
+    enter = 0
+    while enter == 0:
+        for i in range(0,8):
+            if not(courts[i][time]):
+                   courtOption = i
+                   enter = 1
+                   break
+            else:
+                count += 1
+
+        if count == 8:
+            print("Time is fully booked")
+            option = input("Another Time? ")
+            if option == "Y":
+                time = int(input("Enter here your new time: "))
+            else:
+                break
+            
+        
+    while enter:
+        Schedule(courtOption,time)
+        print("Court Succesfully Booked")
+        print("The court booked will be: ",courtOption+1)
+        for i in range(0,3):
+            print(corresponding[i],": ",guests[-1][i])
+        enter = False
     
-    if not(courts[courtOption-1][time]):
-        Schedule(courtOption-1,time)
-        return 0
-    else:
-        print("Court already booked at given time \n Try Again.")
-        return 1
+            
+            
+    #confirm de phone number
+    #display the code
 
 def Action1():
     x = 1
@@ -80,17 +109,26 @@ def Action2():
 
 #print availability for courts at all times 
 def Action3():
-    for i in range(0,8):
+    """for i in range(0,8):
         print("Court ",i+1,"'s availability: ")
         print(" ")
         for j in range(0,10):
             print("Hour: ",hours[j],":00 to",(hours[j]+1),":00")
             Availability(i,j)
+        print(" ")"""
+
+    for j in range(0,10):
+        print("Hour: ",hours[j],":00 to",(hours[j]+1),":00")
+        print(" ")
+        for i in range(0,8):
+            print("Court ",i+1,": ", end = " ")
+            Availability(i,j)
         print(" ")
 
 Action3()
 while day != "Y":
-    print("To Schedule a Guest enter \'1\' \n To check the availability for a specific time enter \'2\' \n To look the availability for all courts at all times enter \'3\' \n For none of these option enter \'4\' ")
+    print("To Schedule a Guest enter \'1\'\nTo check the availability for a specific time enter \'2\'\nTo look the availability for all courts at all times enter \'3\'\nFor none of these option enter \'4\'")
+    print(" ")
     choice = int(input("Enter your choice here: "))
     if choice == 1:
         Action1()
@@ -100,6 +138,3 @@ while day != "Y":
         Action3()
         
     day = input("Is the day over yet?")
-    
-
-
