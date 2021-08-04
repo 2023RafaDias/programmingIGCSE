@@ -4,6 +4,7 @@ import random
 courts = [[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]
 
 corresponding = ["code","name","phone"]
+names = ["Hour","Court"]
 guests = []
 
 hours = [8,9,10,11,12,13,14,15,16,17,18]
@@ -32,8 +33,6 @@ def Availability(i,j):
         position = courts[i][j]-1
         for i in range(0,3):
             print(corresponding[i],": ",guests[position][i])
-        
-        
 
 #checks what courts are free at a specific time
 def CheckTime(selected):
@@ -89,8 +88,6 @@ def CourtSchedule():
                 break
         else:
             courtOption = int(input("Which of the court options would you like to book?")) - 1
-            
-            
         
     while enter:
         Schedule(courtOption,time)
@@ -102,30 +99,7 @@ def CourtSchedule():
             print(corresponding[i],": ",guests[-1][i])
         enter = False
     
-            
-            
-    #confirm de phone number
-    #display the code
-
-def Action1():
-    x = 1
-    while x:
-        x = CourtSchedule()
-    
-def Action2():
-    check = int(input("Enter the starting hour of the time you want to check: "))
-    CheckTime(check)
-
-#print availability for courts at all times 
 def Action3():
-    """for i in range(0,8):
-        print("Court ",i+1,"'s availability: ")
-        print(" ")
-        for j in range(0,10):
-            print("Hour: ",hours[j],":00 to",(hours[j]+1),":00")
-            Availability(i,j)
-        print(" ")"""
-
     for j in range(0,10):
         print("Hour: ",hours[j],":00 to",(hours[j]+1),":00")
         print(" ")
@@ -140,29 +114,34 @@ while day != "Y":
     print(" ")
     choice = int(input("Enter your choice here: "))
     if choice == 1:
-        Action1()
+        x = 1
+        while x:
+            x = CourtSchedule()
     elif choice == 2:
-        Action2()
+        check = int(input("Enter the starting hour of the time you want to check: "))
+        CheckTime(check)
     elif choice == 3:
         Action3()
         
     day = input("Is the day over yet?")
 
-names = ["Hour","Court"]
-
-most[0] = amount[0][0]
-most[1] = amount[1][0]
+print("")
+print("MOST BOOKINGS: ")
 
 for j in range(0,2):
+    print(" ")
     for i in range(0,len(amount[j])):
         if amount[j][i] > most[j]:
             most[j] = amount[j][i]
 
     if most[j]:
+        print(names[j],": ")
         for i in range(0,len(amount[j])):
             if amount[j][i] == most[j]:
                 print(names[j],hours[i])
         print("The ",names[j],"(s) had ",most[j],"bookings")
+    else:
+        print(names[j],": None, There were no bookings")
         
 
 print("")
@@ -172,9 +151,3 @@ for i in range(0,8):
 
 
 print("Total number of bookings was ",totalNumber)
-
-
-
-#count how many bookings there were
-#change so that the attendant is able to seelct the court to be booked.
-#display the available courts and then ask user to select one
