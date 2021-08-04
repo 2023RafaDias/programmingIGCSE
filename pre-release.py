@@ -70,9 +70,8 @@ def CourtSchedule():
     while enter == 0:
         for i in range(0,8):
             if not(courts[i][time]):
-                   courtOption = i
-                   enter = 1
-                   break
+                print("Court ",i+1,": free")
+                enter = 1
             else:
                 count += 1
 
@@ -83,6 +82,9 @@ def CourtSchedule():
                 time = int(input("Enter here your new time: "))
             else:
                 break
+        else:
+            courtOption = int(input("Which of the court options would you like to book?")) - 1
+            
             
         
     while enter:
@@ -138,3 +140,7 @@ while day != "Y":
         Action3()
         
     day = input("Is the day over yet?")
+
+#count how many bookings there were
+#change so that the attendant is able to seelct the court to be booked.
+#display the available courts and then ask user to select one
