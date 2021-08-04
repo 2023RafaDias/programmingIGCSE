@@ -8,6 +8,11 @@ guests = []
 
 hours = [8,9,10,11,12,13,14,15,16,17,18]
 
+amount = [0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]
+most = [0,0]
+
+totalNumber = 0
+
 day = "started"
 print("Day Has Started")
 print(" ")
@@ -89,6 +94,8 @@ def CourtSchedule():
         
     while enter:
         Schedule(courtOption,time)
+        amount[0][time] += 1
+        amount[1][courtOption] += 1
         print("Court Succesfully Booked")
         print("The court booked will be: ",courtOption+1)
         for i in range(0,3):
@@ -140,6 +147,33 @@ while day != "Y":
         Action3()
         
     day = input("Is the day over yet?")
+
+names = ["Hour","Court"]
+
+most[0] = amount[0][0]
+most[1] = amount[1][0]
+
+for j in range(0,2):
+    for i in range(0,len(amount[j])):
+        if amount[j][i] > most[j]:
+            most[j] = amount[j][i]
+
+    if most[j]:
+        for i in range(0,len(amount[j])):
+            if amount[j][i] == most[j]:
+                print(names[j],hours[i])
+        print("The ",names[j],"(s) had ",most[j],"bookings")
+        
+
+print("")
+
+for i in range(0,8):
+    totalNumber += amount[1][i]
+
+
+print("Total number of bookings was ",totalNumber)
+
+
 
 #count how many bookings there were
 #change so that the attendant is able to seelct the court to be booked.
