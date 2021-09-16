@@ -125,11 +125,16 @@ for j in range(0,2):
             most[j] = amount[j][i]
 
     if most[j]:
-        print(names[j],": ")
+        print("The ",names[j]," hour(s) with most bookings were... ")
+        if j == 0:
+            add = 7
+        else:
+            add = 0
+            
         for i in range(0,len(amount[j])):
             if amount[j][i] == most[j]:
-                print(names[j],hours[i])
-        print("The ",names[j],"(s) had ",most[j],"bookings")
+                print(names[j],i+1+add)
+        print("... with a total of ",most[j],"booking(s)")
     else:
         print(names[j],": None, There were no bookings")
         
